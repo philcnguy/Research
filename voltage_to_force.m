@@ -61,11 +61,14 @@ title("Calibrated Data");
 b = y_adjusted(1);
 m = -1 * coefficients(1) * 1000 / 9.81;
 
+average_force = mean((whole_wing_12v_11_13_24.signals.values(5001:end) - volt_no_mass - b) / m);
+
 figure(5)
 hold on
 plot(tout, (whole_wing_12v_11_13_24.signals.values - volt_no_mass - b) / m, 'DisplayName', 'Data');
-plot(tout, (no_flapping_11_13_24.signals.values - volt_no_mass - b) / m, 'DisplayName', 'At rest');
+plot(tout, (no_flapping_11_13_24.signals.values - volt_no_mass - b) / m, 'DisplayName', 'At rest, F = -0.1072 N');
 plot(tout, (mass_0g_11_13_24.signals.values - volt_no_mass - b) / m, 'DisplayName', 'No mass');
+yline(mean((whole_wing_12v_11_13_24.signals.values(5001:end) - volt_no_mass - b) / m), 'DisplayName', 'Average, F = -0.0731 N');
 
 legend
 xlabel("Time (s)");
